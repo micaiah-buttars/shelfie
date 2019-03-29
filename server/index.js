@@ -17,6 +17,8 @@ massive(CONNECTION_STRING)
 })
 .catch(err => console.log(err))
 
+app.get('/api/inventory', controller.get)
+
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening on ${SERVER_PORT}`))
