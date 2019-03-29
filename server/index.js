@@ -18,6 +18,7 @@ massive(CONNECTION_STRING)
 .catch(err => console.log(err))
 
 app.get('/api/inventory', controller.get)
+app.post('/api/product', controller.post)
 
 
 

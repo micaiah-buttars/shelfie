@@ -11,9 +11,11 @@ class Form extends Component {
         }
     }
 
+    
+
     handleChange = e => {
-        let {value} = e.target
-        let id = e.target.id
+        let {id, value} = e.target
+        // let id = e.target.id
 
         this.setState({
             [id]: value
@@ -31,18 +33,23 @@ class Form extends Component {
 
         })
     }
+ // Doesn't actually clear input boxes, but does other intended purposes.
+    handleClickAdd = () => {
+        let product = this.state
+        this.props.createProduct(product)
+    }
 
     
     render(){
         return (
             <div>
                 <div>Form</div>
-                <input id="imageUrl" onChange={this.handleChange}/>
-                <input id="productName" onChange={this.handleChange}/>
-                <input id="price" onChange={this.handleChange}/>
+                <input type="text" id="name" onChange={this.handleChange}/>
+                <input type="number" id="price" onChange={this.handleChange}/>
+                <input type="text" id="imageUrl" onChange={this.handleChange}/>
 
                 <button onClick={this.handleClickCancel}>Cancel</button>
-                <button>Add to Inventory</button>
+                <button onClick={this.handleClickAdd}>Add to Inventory</button>
             </div>
             
         )
