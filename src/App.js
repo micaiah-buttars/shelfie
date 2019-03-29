@@ -6,10 +6,28 @@ import Header from './Components/Header/Header';
 
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      inventory: [{
+        name: 's',
+        price: 0,
+        imgurl: 'a'
+      }, {
+        name: 's',
+        price: 0,
+        imgurl: 'a'
+      }, {
+        name: 'sa',
+        price: 0,
+        imgurl: 's'
+      }]
+    }
+  }
   render() {
     return (
       <div className="App">
-        <Dashboard/>
+        <Dashboard inventory={this.state.inventory}/>
         <Form />
         <Header />
       </div>

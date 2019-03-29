@@ -5,30 +5,29 @@ class Form extends Component {
         super()
 
         this.state={
-            imageUrl: '',
-            productName: '',
-            price: ''
+            name: '',
+            price: 0,
+            imgurl: ''
         }
     }
 
     handleChange = e => {
         let {value} = e.target
-        let name = e.target.name
+        let id = e.target.id
 
         this.setState({
-            [name]: value
+            [id]: value
         })
     }
 
 
     // Doesn't actually clear input boxes, but sets state of them to be blank.
     handleClickCancel = () => {
-        let value = ''
 
         this.setState({
-            imageUrl: value,
-            productName: value,
-            price: value
+            name: '',
+            price: 0,
+            imgurl: ''
 
         })
     }
@@ -38,9 +37,9 @@ class Form extends Component {
         return (
             <div>
                 <div>Form</div>
-                <input name="imageUrl" onChange={this.handleChange}/>
-                <input name="productName" onChange={this.handleChange}/>
-                <input name="price" onChange={this.handleChange}/>
+                <input id="imageUrl" onChange={this.handleChange}/>
+                <input id="productName" onChange={this.handleChange}/>
+                <input id="price" onChange={this.handleChange}/>
 
                 <button onClick={this.handleClickCancel}>Cancel</button>
                 <button>Add to Inventory</button>
