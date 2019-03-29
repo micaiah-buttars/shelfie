@@ -1,13 +1,27 @@
 import React, { Component } from 'react'
 
 class Form extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
 
         this.state={
+            id: null,
             name: '',
             price: 0,
             imgurl: ''
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        let {id, name, price, img} = this.props.product
+        if(prevProps.product.id !== this.props.product.id){
+            this.setState({
+                id,
+                name,
+                price,
+                img,
+                edit: true
+            })
         }
     }
 
@@ -15,7 +29,6 @@ class Form extends Component {
 
     handleChange = e => {
         let {id, value} = e.target
-        // let id = e.target.id
 
         this.setState({
             [id]: value
@@ -23,33 +36,52 @@ class Form extends Component {
     }
 
 
-    // Doesn't actually clear input boxes, but sets state of them to be blank.
     handleClickCancel = () => {
+        document.getElementById("form").reset()
 
-        this.setState({
-            name: '',
-            price: 0,
-            imgurl: ''
-
-        })
     }
- // Doesn't actually clear input boxes, but does other intended purposes.
+
+
     handleClickAdd = () => {
-        let product = this.state
+        let {name, price, img} = this.state
+        let product = {
+            name,
+            price,
+            img
+        }
         this.props.createProduct(product)
+        document.getElementById("form").reset()
+        this.props.getInventory()
     }
+
+    handleEdit(){
+        let {name, price, img} = this.state
+        let product = {
+            name,
+            price,
+            img
+        }
+        this.props.editSelect(product)
+    }
+    
 
     
     render(){
         return (
             <div>
                 <div>Form</div>
-                <input type="text" id="name" onChange={this.handleChange}/>
-                <input type="number" id="price" onChange={this.handleChange}/>
-                <input type="text" id="imageUrl" onChange={this.handleChange}/>
+                <form id="form">
+                <input type="text" placeholder="name"  id="name" onChange={this.handleChange}/>
+                <input type="number" placeholder="price" id="price" onChange={this.handleChange}/>
+                <input type="text" placeholder="image" id="imageUrl" onChange={this.handleChange}/>
+                </form>
+                
 
                 <button onClick={this.handleClickCancel}>Cancel</button>
-                <button onClick={this.handleClickAdd}>Add to Inventory</button>
+                {this.state.id
+            ? <button onClick={this.handleEdit}>Save Changes</button>
+            : <button onClick={this.handleClickAdd}>Add to Inventory</button>
+          }
             </div>
             
         )

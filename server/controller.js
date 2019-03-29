@@ -16,6 +16,16 @@ module.exports = {
         .then(products => {
             res.status(200).send(products)
         })
+    },
+
+    delete: (req, res) => {
+        const db = req.app.get("db")
+        const {id} = req.params
+
+        db.delete_product(id)
+        .then(
+            res.status(200).send(`product deleted`)
+        )
     }
 
 

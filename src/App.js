@@ -11,31 +11,74 @@ class App extends Component {
     super();
 
     this.state = {
-      inventory: []
+      inventory: [],
+      currentProduct: {}
     }
+    this.getInventory = this.getInventory.bind(this)
+    this.editSelect = this.editSelect.bind(this)
   }
+
+  setId = id => {
+    this.setState({
+      id: id,
+    })
+  }
+  editSelect(product) {
+    this.setState({
+      currentProduct: product
+    })
+  }
+
+
+
+
   createProduct = product => {
-    axios.post('/api/product', product)
-        .then(this.componentDidMount())
+    axios.post('/api/product', product).then(res => {
+      this.setState({
+        inventory: res.data
+      })
+      this.getInventory()
+    })
 }
-  componentDidMount() {
-    axios.get('/api/inventory').then(res => {
+ 
+  updateProduct = product => {
+    axios.put(`/api/inventory/${product.id}`, product).then(res => {
       this.setState({
         inventory: res.data
       })
     })
   }
+
+
+  componentDidMount() {
+    this.getInventory()
+  }
+
+  getInventory() {
+    axios.get('/api/inventory')
+      .then(res => this.setState({ inventory: res.data }))
+  }
+
+
   
   render() {
-    return (
-      <div className="App">
-        <Dashboard inventory={this.state.inventory}/>
-        <Form 
-        componentDidMount={this.componentDidMount}
-        createProduct={this.createProduct}/>
-        <Header />
-      </div>
-    );
+    if(this.componentDidMount){
+      return (
+        <div className="App">
+          <Header />
+          <Dashboard inventory={this.state.inventory}
+          setId={this.setId}
+          deleteProduct={this.deleteProduct}
+          getInventory={this.getInventory}/>
+          <Form 
+          product={this.state.currentProduct}
+          getInventory={this.getInventory}
+          createProduct={this.createProduct}
+          editSelect={this.editSelect}/>
+        </div>
+      );
+    }
+    
   }
 }
 

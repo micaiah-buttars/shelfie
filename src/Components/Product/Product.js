@@ -5,10 +5,19 @@ class Product extends Component {
         super(props)
     
         this.state = {
+          id: props.product.id,
           name: props.product.name,
           price: props.product.price,
           imgurl: props.product.imgurl,
         }
+      }
+
+
+      handleSetId = () =>{
+          this.props.setId(this.state.id)
+      }
+      handleDeleteProduct = () =>{
+          this.props.deleteProduct(this.state.id)
       }
 
     render(){
@@ -17,6 +26,8 @@ class Product extends Component {
                 <p>{this.props.product.name}</p>
                 <p>{this.props.product.price}</p>
                 <img src={this.props.product.imgurl} alt="" width="200"/>
+                <button onClick={this.handleDeleteProduct}>Delete</button>
+                <button onClick={this.handleSetId}>Edit</button>
 
 
 
