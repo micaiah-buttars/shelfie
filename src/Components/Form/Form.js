@@ -69,19 +69,18 @@ class Form extends Component {
     render(){
         return (
             <div>
-                <div>Form</div>
-                <form id="form">
+                <form className="form" id="form">
                 <input type="text" placeholder="name"  id="name" onChange={this.handleChange}/>
                 <input type="number" placeholder="price" id="price" onChange={this.handleChange}/>
                 <input type="text" placeholder="image" id="imageUrl" onChange={this.handleChange}/>
-                </form>
-                
-
                 <button onClick={this.handleClickCancel}>Cancel</button>
                 {this.state.id
             ? <button onClick={this.handleEdit}>Save Changes</button>
             : <button onClick={this.handleClickAdd}>Add to Inventory</button>
           }
+                </form>
+                
+
             </div>
             
         )

@@ -8,7 +8,7 @@ class Product extends Component {
           id: props.product.id,
           name: props.product.name,
           price: props.product.price,
-          imgurl: props.product.imgurl,
+          img: props.product.img,
         }
       }
 
@@ -25,7 +25,7 @@ class Product extends Component {
             <div>
                 <p>{this.props.product.name}</p>
                 <p>{this.props.product.price}</p>
-                <img src={this.props.product.imgurl} alt="" width="200"/>
+                <img src={this.props.product.img} alt="" width="200"/>
                 <button onClick={this.handleDeleteProduct}>Delete</button>
                 <button onClick={this.handleSetId}>Edit</button>
 

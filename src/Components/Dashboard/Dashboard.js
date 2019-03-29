@@ -17,7 +17,6 @@ class Dashboard extends Component {
     render(){
         return (
             <div>
-                <div>Dashboard</div>
                 {this.props.inventory.map(product => {
                     return <Product
                     key={product.id}
